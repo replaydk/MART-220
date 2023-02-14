@@ -1,0 +1,10 @@
+images/idle/Idle (1)F.png
+images/idle/Idle (2)F.png
+images/idle/Idle (3)F.png
+images/idle/Idle (4)F.png
+images/idle/Idle (5)F.png
+images/idle/Idle (6)F.png
+images/idle/Idle (7)F.png
+images/idle/Idle (8)F.png
+images/idle/Idle (9)F.png
+images/idle/Idle (10)F.png
