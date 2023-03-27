@@ -1,0 +1,8 @@
+images/dead/Dead (1).png
+images/dead/Dead (2).png
+images/dead/Dead (3).png
+images/dead/Dead (4).png
+images/dead/Dead (5).png
+images/dead/Dead (6).png
+images/dead/Dead (7).png
+images/dead/Dead (8).png
