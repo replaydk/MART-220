@@ -15,6 +15,7 @@ var dinoidle;
 var dinowalk; 
 var r = 0;
 var eggy = 670;
+var eggy1 = 670;
 var y = 350;
 var x = 275;
 var m = []
@@ -25,7 +26,17 @@ var egg = ("./images/egg/goodegg.png");
 var egg1 = ("./images/egg/badegg.png");
 var eggObject;
 var eggx = 0;
+var eggx1 = 0;
 var eggcounter = 0;
+
+var eggtouch = false;
+var topegg; 
+var botegg; 
+var leftegg;
+var rightegg;
+
+
+
 
 //PRELOAD
 function preload()
@@ -47,6 +58,7 @@ function setup() {
     createCanvas(canvasX,canvasY); 
     image(background1,0,0,533,400);
 
+
 //egg random
     for (let i = 0; i < 100; i++) {} 
          eggx +=random(200,720);
@@ -58,19 +70,25 @@ function setup() {
     setInterval (timerFunction,1000);
     setInterval(displayCounter, 90);
 //D ANIMATION WALK AND IDLE
-    dinoidle = new DinoAnimation(AnimationListIdle, x,y,340,236);
+    dinoidle = new DinoAnimation(AnimationListIdle, this.x,this.y,340,236);
     dinoidle.animate();
-    dinowalk = new DinoAnimation(dinowalk, x,y,340,236);
+    dinowalk = new DinoAnimation(dinowalk, this.x,this.y,340,236);
     dinowalk.animate();
+    goodegg = new EggClass(eggx  = random(100,(canvasX - 100))
+    ,eggy = random(100,(canvasY - 100)));
+    badegg = new EggClass(eggx1  = random(100,(canvasX - 100))
+    ,eggy1 = random(100,(canvasY - 100)));
 }
 
 //DRAW
 function draw(){
-    console.log();
+    //console.log(this.x);
+    console.log(eggy);console.log(eggx);
+   
 //WINDOW'S XP BACKGROUND
 background(background1,1066,800);  
 image(egg,eggx,eggy,100,100);
-image(egg1, eggx+100, eggy, 100,100)
+image(egg1, eggx1, eggy1, 100,100)
 
 
 
@@ -80,7 +98,7 @@ image(egg1, eggx+100, eggy, 100,100)
 //FUNCTION FOR A + D MOVEMENT 
     DinoMovement();
 //Function for Egg counter
-    eggCounter();
+   // eggCounter();
  
 
 
@@ -110,20 +128,7 @@ image(egg1, eggx+100, eggy, 100,100)
 // ADD KEY PRESSED/ MOUSE CLICKED FUNTION TO START SOUND 
 // ADD BUZZ WHEN TIMER = 0 AND DISABLE KEY MOVEMENT
 
-function eggCounter(){
-if (x > eggx) {
-      
-    eggcounter += 1;
-    eggx  = random(x+50,canvasX) ;
-    }
-    if (eggx > canvasX - 50) {
-        textSize(72);
-        text(Victory,250,500);
-        if ( eggx > canvasX - 30 ){ eggx = 10000};
-        
-    }
-   
-}
+
 //Timer countdown function
 function timerFunction ()
 {
@@ -142,41 +147,42 @@ function DinoMovement()
     if(keyIsPressed)
 {
     if(key == 'd')
-{   x += 2.2;
+{  
     dinowalk.draw(r);
-    dinowalk.setX(dinowalk.getX()+2);
-    dinoidle.setX(dinoidle.getX()+2);
+    dinowalk.setX(dinowalk.getX()+4);
+    dinoidle.setX(dinoidle.getX()+4);
+    this.x = this.x + 4;
 }   
    else if(key == 'a')
     
 {   
-    //dinowalk.setX();
-    push();
 
-    translate(dinowalk)
-    scale(-1,1);
+    push();
+    //translate(width,0);
+    //scale(-1,0);
+
     dinowalk.draw(r);
     pop();
-    x = x + -2.2;
-    dinowalk.setX(dinowalk.getX()-2);
-    dinoidle.setX(dinoidle.getX()-2);
+    dinowalk.setX(dinowalk.getX()-4);
+    dinoidle.setX(dinoidle.getX()-4)
+    this.x = this.x - 4;
 
-    
+
 }
 
     else if(key == 'w')
     
-{   //x = x + -2.2;
+{   this.y = this.y -2.2;
     dinowalk.draw(r);
-    dinowalk.setY(dinowalk.getY()-2);
-    dinoidle.setY(dinoidle.getY()-2);
+    dinowalk.setY(dinowalk.getY()-4);
+    dinoidle.setY(dinowalk.getY()-4);
 }
     else if(key == 's')
     
-{  // x = x + -2.2;
+{  this.y = this.y + 2.2;
     dinowalk.draw(r);
-    dinowalk.setY(dinowalk.getY()+2);
-    dinoidle.setY(dinoidle.getY()+2);
+    dinowalk.setY(dinowalk.getY()+4);
+    dinoidle.setY(dinoidle.getY()+4);
 }
 
 else
