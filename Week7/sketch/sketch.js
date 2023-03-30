@@ -21,7 +21,7 @@ var x = 275;
 var m = []
 //Egg Varibles
 var i = 0;
-var Egg;
+
 var egg = ("./images/egg/goodegg.png");
 var egg1 = ("./images/egg/badegg.png");
 var eggObject;
@@ -30,8 +30,8 @@ var eggx1 = 0;
 var eggcounter = 0;
 
 var eggtouch = false;
-var topegg; 
-var botegg; 
+var topegg;
+var botegg;
 var leftegg;
 var rightegg;
 
