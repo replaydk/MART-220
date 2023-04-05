@@ -22,20 +22,19 @@ class DinoAnimation
          return this.h;
     }
     setX(x)
-{
+    {
     this.x = x;
-}
-setY(y)
-{
+    }
+    setY(y)
+    {
     this.y = y;
-}
+    }
 
-    draw(r)
-{
-
-image(this.Dinosaur[r], this.x, this.y, this.w, this.h)
-}
-    animate()
+draw(r)
+    {
+    image(this.Dinosaur[r], this.x, this.y, this.w, this.h)
+    }
+animate()
     {
     
         for (var d = 0; d < AnimationListIdle.length; d++) {

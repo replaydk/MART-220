@@ -29,12 +29,15 @@ var eggx = 0;
 var eggx1 = 0;
 var eggcounter = 0;
 
-var eggtouch = false;
-var topegg;
-var botegg;
-var leftegg;
-var rightegg;
 
+var backgroundsound;
+var goodsound;
+var badsound;
+var timersound;
+
+
+var c;
+var hit = false;
 
 
 
@@ -58,6 +61,8 @@ function setup() {
     createCanvas(canvasX,canvasY); 
     image(background1,0,0,533,400);
 
+ 
+
 
 //egg random
     for (let i = 0; i < 100; i++) {} 
@@ -72,23 +77,32 @@ function setup() {
 //D ANIMATION WALK AND IDLE
     dinoidle = new DinoAnimation(AnimationListIdle, this.x,this.y,340,236);
     dinoidle.animate();
+   
+   
     dinowalk = new DinoAnimation(dinowalk, this.x,this.y,340,236);
     dinowalk.animate();
+    
+    
     goodegg = new EggClass(eggx  = random(100,(canvasX - 100))
     ,eggy = random(100,(canvasY - 100)));
+    
+    
     badegg = new EggClass(eggx1  = random(100,(canvasX - 100))
     ,eggy1 = random(100,(canvasY - 100)));
 }
 
 //DRAW
 function draw(){
-    //console.log(this.x);
-    console.log(eggy);console.log(eggx);
+    DinoMovement();
+    console.log(eggcounter);
+
    
 //WINDOW'S XP BACKGROUND
 background(background1,1066,800);  
-image(egg,eggx,eggy,100,100);
-image(egg1, eggx1, eggy1, 100,100)
+goodegg = image(egg,eggx,eggy,100,100);
+badegg = image(egg1, eggx1, eggy1, 100,100)
+
+
 
 
 
@@ -99,10 +113,33 @@ image(egg1, eggx1, eggy1, 100,100)
     DinoMovement();
 //Function for Egg counter
    // eggCounter();
- 
+//EGG DINO COLLISION
 
 
+ /*if (dinowalk.x >= eggx1)
+{eggx1 = new EggClass};
+*/
+ hit = collideRectRect(eggx, eggy, 50, 50, dinowalk.x, dinowalk.y, 150, 180);
 
+     stroke(hit ? color('red') : 0);
+   // print('colliding?', hit);
+    textSize(72);
+
+if (hit == true){eggcounter += 1, eggx = random(100,(canvasX - 100))
+    ,eggy = random(100,(canvasY - 100))};
+
+    hit = collideRectRect(eggx1, eggy1, 50, 50, dinowalk.x, dinowalk.y, 150, 180);
+
+    stroke(hit ? color('red') : 0);
+   //print('colliding?', hit);
+   textSize(72);
+
+if (hit == true){eggcounter += -1, eggx1 = random(100,(canvasX - 100))
+   ,eggy1 = random(100,(canvasY - 100))};
+
+
+if (eggcounter >= 10){text("YOU WIN!",400,400)} 
+if (eggcounter <= -10){text("YOU LOSE!",400,400)}
 
 //timer
     textSize(72);
@@ -123,8 +160,10 @@ image(egg1, eggx1, eggy1, 100,100)
 }
 //Egg counter
 
-// DOWNLOAD P.5 COLLIDE + SOUND
+
 // ADD COLLISION TO DINOSAUR AND EGG
+
+
 // ADD KEY PRESSED/ MOUSE CLICKED FUNTION TO START SOUND 
 // ADD BUZZ WHEN TIMER = 0 AND DISABLE KEY MOVEMENT
 
@@ -142,59 +181,7 @@ function timerFunction ()
 }
 }
 //DINO MOVEMENT
-function DinoMovement()
-{
-    if(keyIsPressed)
-{
-    if(key == 'd')
-{  
-    dinowalk.draw(r);
-    dinowalk.setX(dinowalk.getX()+4);
-    dinoidle.setX(dinoidle.getX()+4);
-    this.x = this.x + 4;
-}   
-   else if(key == 'a')
-    
-{   
 
-    push();
-    //translate(width,0);
-    //scale(-1,0);
-
-    dinowalk.draw(r);
-    pop();
-    dinowalk.setX(dinowalk.getX()-4);
-    dinoidle.setX(dinoidle.getX()-4)
-    this.x = this.x - 4;
-
-
-}
-
-    else if(key == 'w')
-    
-{   this.y = this.y -2.2;
-    dinowalk.draw(r);
-    dinowalk.setY(dinowalk.getY()-4);
-    dinoidle.setY(dinowalk.getY()-4);
-}
-    else if(key == 's')
-    
-{  this.y = this.y + 2.2;
-    dinowalk.draw(r);
-    dinowalk.setY(dinowalk.getY()+4);
-    dinoidle.setY(dinoidle.getY()+4);
-}
-
-else
-{
-    dinoidle.draw(r);
-}
-}
-    else
-{
-    dinoidle.draw(r);
-}
-}
 
 
 function displayCounter() {
@@ -204,3 +191,9 @@ function displayCounter() {
     r = 0;
 }
 }
+
+/*function CollisionCheck()
+for(var c = 0; c < egg.length ; c++)
+eggcollision = collideEclipse(x,y,150,200,egg[c]) 
+}
+*/
