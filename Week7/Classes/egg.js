@@ -26,10 +26,40 @@ class EggClass
     {
       return this.h;
     }
+
+   
+    
   /*  
     draw()
     {
      (this.x, this.y, this.w, this.h);
     }
     */
+}
+
+
+
+function SoundStuff(){
+
+    if(keyIsPressed)
+    {
+        if(key == 'm')
+    {  
+backgroundsound.play(); 
+    }  
+}
+if(keyIsPressed)
+{
+    if(key == 'p')
+{  
+backgroundsound.stop(); 
+
+
+
+}
+}
+    
+
+
+
 }

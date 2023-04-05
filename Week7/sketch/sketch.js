@@ -1,6 +1,7 @@
 //Setting
 var timer = 60;
 var mission = "Collect as many eggs as you can before time walks out!" ;
+var Music = "Press M for Tunes! P to Mute."
 var counter = 0; 
 var background1;
 var Victory = "You Win!"
@@ -38,6 +39,7 @@ var timersound;
 
 var c;
 var hit = false;
+var hit1 = false;
 
 
 
@@ -50,6 +52,10 @@ egg1 = loadImage("./images/egg/badegg.png");
 //Dino Stuff
 AnimationListIdle = loadStrings("./images/idle/idle.txt");
 dinowalk = loadStrings("./images/walk/walk.txt");
+backgroundsound = loadSound('./libs/Sound/Background Music.mp3');
+goodsound = loadSound('./libs/Sound/ding.wav');
+badsound = loadSound('./libs/Sound/badsound.wav');
+timersound = loadSound('./libs/Sound/timer.wav');
 
 //Egg stuff
 
@@ -58,9 +64,11 @@ dinowalk = loadStrings("./images/walk/walk.txt");
 //SETUP
 function setup() {
 
+    
+    
     createCanvas(canvasX,canvasY); 
     image(background1,0,0,533,400);
-
+ 
  
 
 
@@ -94,6 +102,8 @@ function setup() {
 //DRAW
 function draw(){
     DinoMovement();
+    SoundStuff();
+    Eggsound();
     console.log(eggcounter);
 
    
@@ -103,43 +113,43 @@ goodegg = image(egg,eggx,eggy,100,100);
 badegg = image(egg1, eggx1, eggy1, 100,100)
 
 
-
-
-
-
-
-
-//FUNCTION FOR A + D MOVEMENT 
     DinoMovement();
-//Function for Egg counter
-   // eggCounter();
-//EGG DINO COLLISION
 
 
- /*if (dinowalk.x >= eggx1)
-{eggx1 = new EggClass};
-*/
- hit = collideRectRect(eggx, eggy, 50, 50, dinowalk.x, dinowalk.y, 150, 180);
 
-     stroke(hit ? color('red') : 0);
-   // print('colliding?', hit);
-    textSize(72);
 
-if (hit == true){eggcounter += 1, eggx = random(100,(canvasX - 100))
-    ,eggy = random(100,(canvasY - 100))};
+    //EGG DINO COLLISION
+    // GOOD EGG
+push();
 
-    hit = collideRectRect(eggx1, eggy1, 50, 50, dinowalk.x, dinowalk.y, 150, 180);
+    
+pop();
 
-    stroke(hit ? color('red') : 0);
-   //print('colliding?', hit);
-   textSize(72);
 
+// BAD EGG
+
+hit = collideRectRect(eggx1, eggy1, 50, 50, dinowalk.x, dinowalk.y, 150, 180);
 if (hit == true){eggcounter += -1, eggx1 = random(100,(canvasX - 100))
    ,eggy1 = random(100,(canvasY - 100))};
 
 
-if (eggcounter >= 10){text("YOU WIN!",400,400)} 
-if (eggcounter <= -10){text("YOU LOSE!",400,400)}
+
+   if (hit == true){badsound.play()}
+ hit = collideRectRect(eggx, eggy, 50, 50, dinowalk.x, dinowalk.y, 150, 180 );
+
+if (hit == true){eggcounter += 1, eggx = random(100,(canvasX - 100))
+    ,eggy = random(100,(canvasY - 100))};
+
+ 
+
+textSize(72)
+if (eggcounter >= 5){text("YOU WIN!",400,400)} 
+if (eggcounter <= -5){text("YOU LOSE!",400,400)}
+
+
+
+
+
 
 //timer
     textSize(72);
@@ -156,6 +166,7 @@ if (eggcounter <= -10){text("YOU LOSE!",400,400)}
     textSize(26);
     stroke(10);
     text(mission, 20,45);
+    text(Music, 20, 80)
     
 }
 //Egg counter
@@ -190,10 +201,13 @@ function displayCounter() {
     if (r > 9) {
     r = 0;
 }
+
+
+}
+function Eggsound(){
+
+    if (hit == true){goodsound.play()}
+
+    
 }
 
-/*function CollisionCheck()
-for(var c = 0; c < egg.length ; c++)
-eggcollision = collideEclipse(x,y,150,200,egg[c]) 
-}
-*/
