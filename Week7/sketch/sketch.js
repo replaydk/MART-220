@@ -36,6 +36,11 @@ var goodsound;
 var badsound;
 var timersound;
 
+var count = 0;
+var myButton;
+
+
+
 
 var c;
 var hit = false;
@@ -97,18 +102,52 @@ function setup() {
     
     badegg = new EggClass(eggx1  = random(100,(canvasX - 100))
     ,eggy1 = random(100,(canvasY - 100)));
+
+   
+
+    myButton = new Button({
+		x: 150,	y: 100,
+		width: 100,		height: 50,
+		align_x: 0,		align_y: 0,
+		content: 'Play',
+
+
+        
+		on_press() {
+
+           // backgroundsound.play();
+			
+            if (!backgroundsound.isPlaying()){
+                backgroundsound.play();
+                myButton.text('pause');
+
+            }
+            else{backgroundsound.pause()
+                myButton.text('play');
+            }
+            
+		}
+        
+	});
+ 
 }
 
 //DRAW
 function draw(){
-    DinoMovement();
-    SoundStuff();
-    Eggsound();
-    console.log(eggcounter);
+    background(background1,1066,800);  
 
+
+
+    DinoMovement();
+    
+    Eggsound();
+    console.log(myButton.x);
+    push();
+    myButton.draw();
+    pop();
    
 //WINDOW'S XP BACKGROUND
-background(background1,1066,800);  
+
 goodegg = image(egg,eggx,eggy,100,100);
 badegg = image(egg1, eggx1, eggy1, 100,100)
 
@@ -166,7 +205,7 @@ if (eggcounter <= -5){text("YOU LOSE!",400,400)}
     textSize(26);
     stroke(10);
     text(mission, 20,45);
-    text(Music, 20, 80)
+
     
 }
 //Egg counter

@@ -39,27 +39,15 @@ class EggClass
 
 
 
-function SoundStuff(){
 
-    if(keyIsPressed)
-    {
-        if(key == 'm')
-    {  
-backgroundsound.play(); 
-    }  
-}
-if(keyIsPressed)
-{
-    if(key == 'p')
-{  
-backgroundsound.stop(); 
+ 
 
 
 
-}
-}
+
+
     
 
 
 
-}
+
