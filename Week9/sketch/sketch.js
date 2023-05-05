@@ -42,17 +42,23 @@ EnemyTri();
 Dinosaur.addAni("Idle",DinoIdle);
 Dinosaur.addAni("Walk",DinoWalk);
 Dinosaur.addAni("Dead",DinoDead);
+
+
+//EGGSPLAT PARTICLE
 eggsplat = new Group();
 eggsplat.collider = 'none';
 eggsplat.direction = () => random(0,-180);
-eggsplat.speed = () => random(1, 5);
-eggsplat.d = 50;
-eggsplat.amount = 10;
+eggsplat.speed = () => random(4, 8);
+eggsplat.d = 15;
+clear();
+eggsplat.amount = 30;
 eggsplat.color = 'yellow';
-allSprites.autoCull = false
-eggsplat.x = Egg.x
-eggsplat.y = Egg.y  
-eggsplat.alpha = 255
+allSprites.autoCull = false;
+eggsplat.x = -100;
+eggsplat.y = -100 ; 
+eggsplat.alpha = 255;
+eggsplat.hide;
+
 
 //Group.cull;
 }
@@ -88,11 +94,16 @@ DinoWASD();
 //Dino-egg collision
 if (Dinosaur.collides(Egg)){
   //Dinosaur.Health ++;
+  eggsplat.show;
   ScoreNumber++; 
+
+
+
   for (var i = 0; i < 10; i++)
-  if (eggsplat.cull(-50)) {
+  if (eggsplat.cull(-500)) {
 		new eggsplat.Sprite(Egg.x,Egg.y,i);
-    eggsplat.amount = 10;
+    eggsplat.amount = 30;
+    eggsplat.alpha = 255;
     eggsplat.x = Egg.x
     eggsplat.y = Egg.y
 
